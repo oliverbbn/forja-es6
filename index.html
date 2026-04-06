@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title> Forja de Itens</title>
+</head>
+<body style="background-color: #222; color: #fff; font-family: Arial; padding: 20px;">
+    <h1>Forja Mágica</h1>
+    <button onclick="forjarArma()" style="padding: 10px; cursor:pointer;">Melhorar Espada</button>
+    <div id="resultado" style="margin-top: 20px; font-size: 20px;"></div>
+
+<script>
+
+// ARROW FUNCTION: Uma função soma escrite em 1 única linha!
+
+const somarDano=(danoBase, buff) => danoBase+ buff;
+
+let espadaBase = {
+    nome: "Espada de Ferro",
+    dano: 15,
+    durabilidade: 100};
+
+function forjarArma(){
+    let buffMagico = {elemento: "Fogo", danoExtra: 10};
+
+// SPREAD OPERATOR (...): Ele pega os pedaços da espada antiga, os pedações do buff mágico e cria uma arma NOVA sem estragar a original.
+
+    let espadaEvoluida = {
+        ...espadaBase,
+        ...buffMagico,
+        nome: "Espada Flamejante", // Sobrescreve o nome antigo
+        danoTotal: somarDano( espadaBase.dano, buffMagico.danoExtra)};
+
+        exibirResultado(espadaEvoluida);
+    }
+ 
+   
+
+function exibirResultado(arma){
+// DESTRUCTURING: Arranca os dados dentro do objeto e vira variáveis soltas!
+
+    const { nome, danoTotal, elemento, durabilidade} = arma;
+
+    let div = document.getElementById('resultado');
+    div.innerHTML = `
+        <h3>Item: ${nome}</h3>
+        <p>Dano Máximo: ${danoTotal}</p>
+        <p>Elemento Especial: ${elemento}</p>
+        <p>Durabilidade: ${durabilidade}</p>
+    `;}
+
+</script>
+
+
+</body>
+</html>
