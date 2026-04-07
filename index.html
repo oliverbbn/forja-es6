@@ -11,6 +11,15 @@
 
 <script>
 
+const materiaisBasicos = ["Ferro", "Madeira", "Couro"];
+const materiaisMagicos = ["Pó de fada", "Cristal de fogo"];
+let estoqueCompleto = [
+    ...materiaisBasicos,
+    ...materiaisMagicos
+];
+
+console.log(estoqueCompleto);
+
 // ARROW FUNCTION: Uma função soma escrite em 1 única linha!
 
 const somarDano=(danoBase, buff) => danoBase+ buff;
