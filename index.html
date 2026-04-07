@@ -6,6 +6,11 @@
 </head>
 <body style="background-color: #222; color: #fff; font-family: Arial; padding: 20px;">
     <h1>Forja Mágica</h1>
+    <select id="encantamento">
+        <option value="fogo">Fogo</option>
+        <option value="gelo">Gelo</option>
+        <option value="raio">Raio</option>
+    </select>
     <button onclick="forjarArma()" style="padding: 10px; cursor:pointer;">Melhorar Espada</button>
     <div id="resultado" style="margin-top: 20px; font-size: 20px;"></div>
 
@@ -22,23 +27,33 @@ console.log(estoqueCompleto);
 
 // ARROW FUNCTION: Uma função soma escrite em 1 única linha!
 
-const somarDano=(danoBase, buff) => danoBase+ buff;
+const somarDano=(danoBase, buffSelecionado) => danoBase + buffSelecionado;
 
 let espadaBase = {
     nome: "Espada de Ferro",
     dano: 15,
     durabilidade: 100};
 
+
+let catalogoDeBuffs = {
+    fogo: {elemento:"Fogo", danoExtra: 10, nomeAdicional: "Flamejante"},
+    gelo: {elemento:"Gelo", danoExtra: 8, nomeAdicional: "Glacial"},
+    raio: {elemento:"Raio", danoExtra: 15, nomeAdicional: "Trovejante"},
+}
+
+
 function forjarArma(){
-    let buffMagico = {elemento: "Fogo", danoExtra: 10};
+    const tipoEscolhido = document.getElementById('encantamento').value;
+
+    let buffSelecionado = catalogoDeBuffs[tipoEscolhido];
 
 // SPREAD OPERATOR (...): Ele pega os pedaços da espada antiga, os pedações do buff mágico e cria uma arma NOVA sem estragar a original.
 
     let espadaEvoluida = {
         ...espadaBase,
-        ...buffMagico,
-        nome: "Espada Flamejante", // Sobrescreve o nome antigo
-        danoTotal: somarDano( espadaBase.dano, buffMagico.danoExtra)};
+        ...buffSelecionado,
+        nome: (espadaBase.nome + " " +  buffSelecionado.nomeAdicional) , // Sobrescreve o nome antigo
+        danoTotal: somarDano( espadaBase.dano, buffSelecionado.danoExtra)};
 
         exibirResultado(espadaEvoluida);
     }
